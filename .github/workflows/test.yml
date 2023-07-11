@@ -34,8 +34,8 @@ jobs:
 
       - name: Exclude dependencies and packages
         run: |
-          sed -i 's/<exclusion>/<exclusion><groupId>com.example.unwanted<\/groupId><artifactId>unwanted-artifact<\/artifactId><\/exclusion><exclusion>/g' pom.xml
-          sed -i 's/<exclude>com.example.unwantedpackage\/**<\/exclude>//g' pom.xml
+          sed -i 's/<exclusion>/<exclusion><groupId>com.extrawest<\/groupId><artifactId>Extrawest-OCPI-2.2.1-EMSP-Server<\/artifactId><\/exclusion><exclusion>/g' pom.xml
+          sed -i 's/<exclude>com.extrawest.ocpi221emsp_client.service\/**<\/exclude>//g' pom.xml
 
       - name: Build project with OpenAPI Generator
         run: |
