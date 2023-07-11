@@ -16,10 +16,15 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
+      - name: Backup original pom.xml
+          run: |
+            cp pom.xml pom_backup.xml
+
       - name: Exclude OpenAPI Generator Plugin
           run: |
             mvn help:effective-pom -Doutput=effective-pom.xml
             sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' effective-pom.xml
+            mv effective-pom.xml pom.xml
             mvn clean install -DskipTests
 
       - name: Start Java application
@@ -39,9 +44,13 @@ jobs:
           # Replace the following line with your actual command to turn off the Java application
           kill $(lsof -t -i:8080)
 
-      - name: Include OpenAPI Generator Plugin with previous configuration
+      - name: Restore original pom.xml
         run: |
-          cp effective-pom.xml pom.xml
+          mv pom_backup.xml pom.xml
+
+#      - name: Include OpenAPI Generator Plugin with previous configuration
+#        run: |
+#          cp effective-pom.xml pom.xml
 
       - name: Exclude dependencies and packages
         run: |
