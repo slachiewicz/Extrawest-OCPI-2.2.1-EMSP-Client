@@ -21,7 +21,7 @@ jobs:
           mvn spring-boot:run &
 
       - name: Wait for Java application to start
-        run: sleep 10
+        run: sleep 20
 
       - name: Download file
         run: |
