@@ -257,7 +257,7 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								downloaded_file
+								downloaded_file.json
 							</inputSpec>
 							<generatorName>java</generatorName>
 							<library>resttemplate</library>
