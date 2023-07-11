@@ -17,8 +17,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Backup original pom.xml
-        run: |
-        cp pom.xml pom_backup.xml
+        run: cp pom.xml pom_backup.xml
 
       - name: Exclude OpenAPI Generator Plugin
           run: |
