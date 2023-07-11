@@ -21,7 +21,7 @@ jobs:
           cp pom.xml pom_backup.xml
 
       - name: Exclude OpenAPI Generator Plugin
-          run: |
+          run:  |
             mvn help:effective-pom -Doutput=effective-pom.xml
             sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' effective-pom.xml
             mv effective-pom.xml pom.xml
