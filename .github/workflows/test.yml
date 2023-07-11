@@ -1,0 +1,51 @@
+name: Build Project with OpenAPI Generator and Publish to Maven
+
+on: [push]
+
+jobs:
+  build-project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+
+      - name: Start Java application
+        run: |
+          mvn spring-boot:run &
+
+      - name: Wait for Java application to start
+        run: sleep 10
+
+      - name: Download file
+        run: |
+          wget http://localhost:8080/v3/api-docs -O downloaded_file
+
+      - name: Turn off Java application
+        run: |
+          # Find and kill the Java application process
+          # Replace the following line with your actual command to turn off the Java application
+          kill $(lsof -t -i:8080)
+
+      - name: Exclude dependencies and packages
+        run: |
+          sed -i 's/<exclusion>/<exclusion><groupId>com.example.unwanted<\/groupId><artifactId>unwanted-artifact<\/artifactId><\/exclusion><exclusion>/g' pom.xml
+          sed -i 's/<exclude>com.example.unwantedpackage\/**<\/exclude>//g' pom.xml
+
+      - name: Build project with OpenAPI Generator
+        run: |
+          mvn clean generate-sources -Dopenapi.generator.inputSpec=downloaded_file
+
+      - name: Publish to Maven repository
+        run: |
+          mvn clean deploy --settings settings.xml
+
+      - name: Display build output
+        run: |
+          # Replace the following line with your actual command to display build output
+          cat target/build.log
