@@ -21,7 +21,7 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' pom.xml
+          xmlstarlet ed -L -d "//plugin[artifactId='openapi-generator-maven-plugin']" pom.xml
           cat pom.xml
           mvn clean install -DskipTests
 
