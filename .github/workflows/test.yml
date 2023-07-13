@@ -21,9 +21,11 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          xmlstarlet ed -L -d "//plugin[artifactId='openapi-generator-maven-plugin']" pom.xml
-          cat pom.xml
-          mvn clean install -DskipTests
+          xmllint --shell pom.xml <<EOF
+          cat //plugin[artifactId='openapi-generator-maven-plugin']
+          delete //plugin[artifactId='openapi-generator-maven-plugin']
+          save
+          EOF
 
       - name: Start Java application
         run: |
