@@ -24,6 +24,7 @@ jobs:
           grep -v "<artifactId>openapi-generator-maven-plugin</artifactId>" pom.xml > pom_temp.xml
           sed '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' pom_temp.xml > pom.xml
           rm pom_temp.xml
+          cat pom.xml
 
       - name: Start Java application
         run: |
