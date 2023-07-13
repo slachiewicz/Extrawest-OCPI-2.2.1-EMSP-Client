@@ -23,10 +23,10 @@ jobs:
         run: |
 #            mvn help:effective-pom -Doutput=effective-pom.xml
 #            sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' effective-pom.xml
-            sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' pom.xml
+          sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' pom.xml
 #            mv effective-pom.xml pom.xml
-            cat pom.xml
-            mvn clean install -DskipTests
+          cat pom.xml
+          mvn clean install -DskipTests
 
       - name: Start Java application
         run: |
