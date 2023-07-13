@@ -22,9 +22,10 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-            mvn help:effective-pom -Doutput=effective-pom.xml
-            sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' effective-pom.xml
-            mv effective-pom.xml pom.xml
+#            mvn help:effective-pom -Doutput=effective-pom.xml
+#            sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' effective-pom.xml
+            sed -i '/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/{:a;N;/<\/plugin>/!ba};/<plugin>.*openapi-generator-maven-plugin<\/artifactId>/d' pom.xml
+#            mv effective-pom.xml pom.xml
             cat pom.xml
             mvn clean install -DskipTests
 
@@ -47,6 +48,9 @@ jobs:
 
       - name: Restore original pom.xml
         run: |
+#
+          mv pom.xml old-pom.xml
+#               
           mv pom_backup.xml pom.xml
 
 #      - name: Include OpenAPI Generator Plugin with previous configuration
