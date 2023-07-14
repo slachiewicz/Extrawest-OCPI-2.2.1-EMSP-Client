@@ -21,25 +21,8 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          python3 -c '
-          import xml.etree.ElementTree as ET
-      
-          # Parse the XML file
-          tree = ET.parse("pom.xml")
-          root = tree.getroot()
-      
-          # Find and remove the plugin section
-          plugins = root.findall(".//plugin")
-          for plugin in plugins:
-            groupId = plugin.find("groupId").text
-            artifactId = plugin.find("artifactId").text
-            if groupId == "org.openapitools" and artifactId == "openapi-generator-maven-plugin":
-              root.remove(plugin)
-      
-          # Write the modified XML to a temporary file
-          tree.write("pom_temp.xml")
-          '
-
+          apt-get update && apt-get install -y xmlstarlet
+          xmlstarlet ed -L -d "//plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']" pom.xml > pom_temp.xml
           mv pom_temp.xml pom.xml
           cat pom.xml
 
