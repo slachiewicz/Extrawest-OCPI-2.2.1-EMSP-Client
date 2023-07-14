@@ -21,6 +21,10 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
+          sed -i '/<plugin>\s+<groupId>org\.openapitools<\/groupId>\s+<artifactId>openapi-generator-maven-plugin<\/artifactId>[\s\S]+?<\/plugin>/d' pom.xml
+          sed -i '/<plugin>\s+<groupId>org\.openapitools<\/groupId>\s+<artifactId>openapi-generator-maven-plugin<\/artifactId>[\s\S]+?<\/plugin>/d' pom_backup.xml
+          sed -n '/<plugin>\s+<groupId>org\.openapitools<\/groupId>\s+<artifactId>openapi-generator-maven-plugin<\/artifactId>[\s\S]+?<\/plugin>/d' pom_backup.xml
+          cat pom_backup.xml
           awk '/<plugin>/,/<\/plugin>/ { if (!/<groupId>org\.openapitools<\/groupId>/ || !/<artifactId>openapi-generator-maven-plugin<\/artifactId>/) { print $0 } }' pom.xml > pom_temp.xml
           cat pom_temp.xml
           mv pom_temp.xml pom.xml
@@ -31,7 +35,7 @@ jobs:
           mvn spring-boot:run &
 
       - name: Wait for Java application to start
-        run: sleep 40
+        run: sleep 10
 
       - name: Download file
         run: |
