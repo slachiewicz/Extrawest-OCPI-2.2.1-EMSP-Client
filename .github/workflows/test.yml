@@ -21,7 +21,11 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          xml ed -L -d "//plugin[groupId/text()='org.openapitools' and artifactId/text()='openapi-generator-maven-plugin']" pom.xml > pom_temp.xml
+          xmllint --shell pom.xml <<EOF > pom_temp.xml
+          cat //plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']
+          delete //plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']
+          save
+          EOF
           mv pom_temp.xml pom.xml
 
       - name: Start Java application
