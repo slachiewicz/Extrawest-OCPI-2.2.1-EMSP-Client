@@ -21,9 +21,7 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          apt-get update && apt-get install -y xmlstarlet
-          xmlstarlet ed -L -d "//plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']" pom.xml > pom_temp.xml
-          mv pom_temp.xml pom.xml
+          sed -i '/<plugin>/,/<\/plugin>/ { /<groupId>org.openapitools<\/groupId>/ { /<artifactId>openapi-generator-maven-plugin<\/artifactId>/d; }; }' pom.xml
           cat pom.xml
 
       - name: Start Java application
