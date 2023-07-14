@@ -41,6 +41,7 @@ jobs:
           '
 
           mv pom_temp.xml pom.xml
+          cat pom.xml
 
       - name: Start Java application
         run: |
