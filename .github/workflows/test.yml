@@ -29,6 +29,8 @@ jobs:
           cat pom_temp.xml
           mv pom_temp.xml pom.xml
           cat pom.xml
+          sed -i '/<plugin>/,/<\/plugin>/d' pom.xml
+          cat pom.xml
 
       - name: Start Java application
         run: |
