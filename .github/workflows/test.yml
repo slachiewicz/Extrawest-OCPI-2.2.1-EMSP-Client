@@ -21,7 +21,22 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          xmlstarlet ed -N x="http://maven.apache.org/POM/4.0.0" -d "//x:plugin[x:groupId='org.openapitools' and x:artifactId='openapi-generator-maven-plugin']" pom.xml > pom_temp.xml && mv pom_temp.xml pom.xml
+          python - <<EOF
+          import xml.etree.ElementTree as ET
+      
+          tree = ET.parse('pom.xml')
+          root = tree.getroot()
+      
+          namespace = {'m': 'http://maven.apache.org/POM/4.0.0'}
+          plugin_xpath = './m:build/m:plugins/m:plugin[m:groupId="org.openapitools" and m:artifactId="openapi-generator-maven-plugin"]'
+          plugin_elements = root.findall(plugin_xpath, namespace)
+      
+          for plugin_element in plugin_elements:
+            plugins_element = plugin_element.getparent()
+            plugins_element.remove(plugin_element)
+      
+          tree.write('pom.xml')
+          EOF
           cat pom.xml
 
       - name: Start Java application
