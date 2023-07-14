@@ -21,7 +21,7 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          sed -i '/<plugin>' pom.xml
+          sed -i '<plugin>\d' pom.xml
           cat pom.xml
 
       - name: Start Java application
