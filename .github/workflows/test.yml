@@ -21,11 +21,25 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          xmllint --shell pom.xml <<EOF > pom_temp.xml
-          cat //plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']
-          delete //plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']
-          save
-          EOF
+          python3 -c '
+          import xml.etree.ElementTree as ET
+      
+          # Parse the XML file
+          tree = ET.parse("pom.xml")
+          root = tree.getroot()
+      
+          # Find and remove the plugin section
+          plugins = root.findall(".//plugin")
+          for plugin in plugins:
+            groupId = plugin.find("groupId").text
+            artifactId = plugin.find("artifactId").text
+            if groupId == "org.openapitools" and artifactId == "openapi-generator-maven-plugin":
+              root.remove(plugin)
+      
+          # Write the modified XML to a temporary file
+          tree.write("pom_temp.xml")
+          '
+
           mv pom_temp.xml pom.xml
 
       - name: Start Java application
