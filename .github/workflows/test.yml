@@ -21,7 +21,8 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          sed -i '/<plugin>/,/<\/plugin>/ { /<groupId>org.openapitools<\/groupId>/ { /<artifactId>openapi-generator-maven-plugin<\/artifactId>/d; }; }' pom.xml
+          awk '/<plugin>/,/\/plugin>/ { if (!/<groupId>org.openapitools<\/groupId>/ || !/<artifactId>openapi-generator-maven-plugin<\/artifactId>/) { print $0 } }' pom.xml > pom_temp.xml
+          mv pom_temp.xml pom.xml
           cat pom.xml
 
       - name: Start Java application
