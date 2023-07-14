@@ -21,11 +21,7 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          wget http://archive.ubuntu.com/ubuntu/pool/universe/x/xmlstarlet/xmlstarlet_1.6.1-2_amd64.deb
-          sudo dpkg -i xmlstarlet_1.6.1-2_amd64.deb
-          sleep 10
-          xmlstarlet ed -L -d "//plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']" pom.xml > pom_temp.xml
-          mv pom_temp.xml pom.xml
+          sed -i '<plugin>\s+<groupId>org\.openapitools<\/groupId>\s+<artifactId>openapi-generator-maven-plugin<\/artifactId>[\s\S]+?<\/plugin>' pom.xml
           cat pom.xml
 
       - name: Start Java application
