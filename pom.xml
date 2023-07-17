@@ -246,46 +246,7 @@
 					</jreleaser>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.openapitools</groupId>
-				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>5.4.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<inputSpec>
-								downloaded_file.json
-							</inputSpec>
-							<generatorName>java</generatorName>
-							<library>resttemplate</library>
-							<apiPackage>com.openapi.generated.springboot.api</apiPackage>
-							<modelPackage>com.openapi.generated.springboot.dto</modelPackage>
-							<supportingFilesToGenerate>
-								ApiCallback.java,ApiClient.java,ApiException.java,ApiResponse.java,Configuration.java,Pair.java,ProgressRequestBody.java,ProgressResponseBody.java,StringUtil.java,ApiKeyAuth.java,Authentication.java,HttpBasicAuth.java,JSON.java,OAuth.java,EncodingUtils.java,JavaTimeFormatter.java,RFC3339DateFormat.java,<!--CustomInstantDeserializer.java-->
-							</supportingFilesToGenerate>
-							<configOptions>
-								<generateSupportingFiles>true</generateSupportingFiles>
-								<!--                                <generateApis>false</generateApis>-->
-								<!--                                <delegatePattern>true</delegatePattern>-->
-								<!--                                <serializableModel>true</serializableModel>-->
-								<sourceFolder>src/main/java</sourceFolder>
-								<dateLibrary>java8</dateLibrary>
-							</configOptions>
-							<typeMappings>
-								<typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
-							</typeMappings>
-							<importMappings>
-								<importMapping>org.threeten.bp.OffsetDateTime=java.time.LocalDateTime</importMapping>
-							</importMappings>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-				</dependencies>
-			</plugin>
+			<plugin><groupId>org.openapitools</groupId><artifactId>openapi-generator-maven-plugin</artifactId><version>5.4.0</version><executions><execution><goals><goal>generate</goal></goals><configuration><inputSpec>downloaded_file.json</inputSpec><generatorName>java</generatorName><library>resttemplate</library><apiPackage>com.openapi.generated.springboot.api</apiPackage><modelPackage>com.openapi.generated.springboot.dto</modelPackage><supportingFilesToGenerate>ApiCallback.java,ApiClient.java,ApiException.java,ApiResponse.java,Configuration.java,Pair.java,ProgressRequestBody.java,ProgressResponseBody.java,StringUtil.java,ApiKeyAuth.java,Authentication.java,HttpBasicAuth.java,JSON.java,OAuth.java,EncodingUtils.java,JavaTimeFormatter.java,RFC3339DateFormat.java,</supportingFilesToGenerate><configOptions><generateSupportingFiles>true</generateSupportingFiles><sourceFolder>src/main/java</sourceFolder><dateLibrary>java8</dateLibrary></configOptions><typeMappings><typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping></typeMappings><importMappings><importMapping>org.threeten.bp.OffsetDateTime=java.time.LocalDateTime</importMapping></importMappings></configuration></execution></executions><dependencies></dependencies></plugin>
 		</plugins>
 	</build>
 
