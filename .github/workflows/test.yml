@@ -26,7 +26,7 @@ jobs:
 
       - name: Start Java application
         run: |
-          mvn spring-boot:run
+          mvn spring-boot:run &
 
       - name: Wait for Java application to start
         run: sleep 10
