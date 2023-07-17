@@ -1,15 +1,15 @@
-    import re
+import xml.etree.ElementTree as ET
 
-    # Load the pom.xml file
-    with open('pom.xml', 'r') as file:
-        content = file.read()
-    
-    # Define the regex pattern to match the plugin section
-        pattern = r'<plugin>\s+<groupId>org\.openapitools<\/groupId>\s+<artifactId>openapi-generator-maven-plugin<\/artifactId>[\s\S]+?<\/plugin>'
-      
-      # Remove the plugin section from the content
-        content = re.sub(pattern, '', content)
+# Parse the pom.xml file
+tree = ET.parse('pom.xml')
+root = tree.getroot()
 
-    # Write the modified content back to the pom.xml file
-    with open('pom.xml', 'w') as file:
-        file.write(content)
+# Find the plugin element to remove
+plugin_element = root.find(".//plugin[groupId='org.openapitools' and artifactId='openapi-generator-maven-plugin']")
+
+# Remove the plugin element if found
+if plugin_element is not None:
+    root.remove(plugin_element)
+
+# Save the modified XML back to the file
+tree.write('pom.xml')
