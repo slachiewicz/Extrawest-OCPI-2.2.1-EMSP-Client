@@ -19,10 +19,7 @@ jobs:
       - name: Backup original pom.xml
         run: cp pom.xml pom_backup.xml
 
-      - name: Exclude OpenAPI Generator Plugin
-        run: |
-          sed -i 's/<plugin>\s+<groupId>org\.openapitools<\/groupId>\s+<artifactId>openapi-generator-maven-plugin<\/artifactId>[\s\S]+?<\/plugin>/ /g' pom.xml
-          cat pom.xml
+
 
       - name: Start Java application
         run: |
