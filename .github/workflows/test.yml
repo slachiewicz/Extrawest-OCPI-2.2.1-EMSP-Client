@@ -21,7 +21,7 @@ jobs:
 
       - name: Exclude OpenAPI Generator Plugin
         run: |
-          run: python remove_plugin.py
+          python remove_plugin.py
           cat pom.xml
 
       - name: Start Java application
