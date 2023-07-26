@@ -16,13 +16,6 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-      - name: Backup original pom.xml
-        run: cp pom.xml pom_backup.xml
-
-      - name: Exclude OpenAPI Generator Plugin
-        run: |
-          python remove_plugin.py
-          cat pom.xml
 
       - name: Start Java application
         run: |
