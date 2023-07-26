@@ -46,11 +46,11 @@ jobs:
         run: |
           mvn clean -Pclient-generation generate-sources -Dopenapi.generator.inputSpec=downloaded_file
    
-
-      - name: Display build output
-        run: |
-          # Replace the following line with your actual command to display build output
-          cat target/build.log
+#
+#      - name: Display build output
+#        run: |
+#          # Replace the following line with your actual command to display build output
+#          cat target/build.log
 
   publish:
     runs-on: ubuntu-latest
