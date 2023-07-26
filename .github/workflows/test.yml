@@ -45,12 +45,28 @@ jobs:
       - name: Build project with OpenAPI Generator
         run: |
           mvn clean -Pclient-generation generate-sources -Dopenapi.generator.inputSpec=downloaded_file
-
-      - name: Publish to Maven repository
-        run: |
-          mvn clean deploy --settings settings.xml
+   
 
       - name: Display build output
         run: |
           # Replace the following line with your actual command to display build output
           cat target/build.log
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Publish package
+        env:
+          JRELEASER_NEXUS2_USERNAME: ${{ secrets.JRELEASER_NEXUS2_USERNAME }}
+          JRELEASER_NEXUS2_PASSWORD: ${{ secrets.JRELEASER_NEXUS2_PASSWORD }}
+          JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
+          JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
+          JRELEASER_GPG_PUBLIC_KEY: ${{ secrets.JRELEASER_GPG_PUBLIC_KEY }}
+          JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn -Prelease deploy jreleaser:deploy -DaltDeploymentRepository=local::file:./target/staging-deploy
