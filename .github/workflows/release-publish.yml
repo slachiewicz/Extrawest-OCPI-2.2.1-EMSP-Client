@@ -1,11 +1,16 @@
 name: Publish package to the Maven Central Repository
+#on:
+#  push:
+#    branches: [ IP0001-257 ]
+##    tags:
+##      - v*
+#  pull_request:
+#    branches: [ main ]
+
 on:
   push:
-    branches: [ IP0001-257 ]
-#    tags:
-#      - v*
-  pull_request:
-    branches: [ main ]
+    branches:
+      - IP0001-257
 jobs:
   publish:
     runs-on: ubuntu-latest
