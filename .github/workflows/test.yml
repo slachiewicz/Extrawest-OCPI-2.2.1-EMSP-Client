@@ -1,6 +1,9 @@
 name: Build Project with OpenAPI Generator and Publish to Maven
 
-on: [push]
+on:
+  push:
+    branches:
+      - dev
 
 jobs:
   build-project:

@@ -1,16 +1,13 @@
 name: Publish package to the Maven Central Repository
 #on:
 #  push:
-#    branches: [ IP0001-257 ]
-##    tags:
-##      - v*
+#    tags:
+#      - v*
 #  pull_request:
 #    branches: [ main ]
 
-on:
-  push:
-    branches:
-      - IP0001-257
+on: [push]
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -23,7 +20,7 @@ jobs:
           distribution: 'adopt'
       - name: Publish package
         env:
-          JRELEASER_NEXUS2_USERNAME: ${{ secrets.JRELEASER_NEXUS2_USERNAME }
+          JRELEASER_NEXUS2_USERNAME: ${{ secrets.JRELEASER_NEXUS2_USERNAME }}
           JRELEASER_NEXUS2_PASSWORD: ${{ secrets.JRELEASER_NEXUS2_PASSWORD }}
           JRELEASER_GPG_PASSPHRASE: ${{ secrets.JRELEASER_GPG_PASSPHRASE }}
           JRELEASER_GPG_SECRET_KEY: ${{ secrets.JRELEASER_GPG_SECRET_KEY }}
