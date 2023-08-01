@@ -37,7 +37,6 @@ jobs:
       - name: Build project with OpenAPI Generator
         run: |
           mvn clean -Pclient-generation generate-sources -Dopenapi.generator.inputSpec=downloaded_file
-  
 
   publish:
     runs-on: ubuntu-latest
