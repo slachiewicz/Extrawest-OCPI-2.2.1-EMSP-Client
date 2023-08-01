@@ -33,14 +33,6 @@ jobs:
           # Find and kill the Java application process
           # Replace the following line with your actual command to turn off the Java application
           kill $(lsof -t -i:8080)
-          
-          
-          
-
-#      - name: Exclude dependencies and packages
-#        run: |
-#          sed -i 's/<exclusion>/<exclusion><groupId>com.extrawest<\/groupId><artifactId>Extrawest-OCPI-2.2.1-EMSP-Server<\/artifactId><\/exclusion><exclusion>/g' pom.xml
-#          sed -i 's/<exclude>com.extrawest.ocpi221emsp_client.service\/**<\/exclude>//g' pom.xml
 
       - name: Build project with OpenAPI Generator
         run: |
