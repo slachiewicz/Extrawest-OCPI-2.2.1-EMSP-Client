@@ -1,7 +1,7 @@
 # Extrawest-OCPI-2.2.1-EMSP-Client
 
 OCPI 2.2.1
-- API version: 1.0
+- API version: 2023.8.1
 
 This API exposes endpoints to manage OCPI entities.
 
@@ -40,7 +40,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.extrawest</groupId>
   <artifactId>Extrawest-OCPI-2.2.1-EMSP-Client</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>2023.8.1</version>
   <scope>compile</scope>
 </dependency>
 ```
